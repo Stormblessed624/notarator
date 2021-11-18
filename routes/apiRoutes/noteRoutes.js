@@ -8,10 +8,10 @@ router.get('/notes', (req, res) => {
 
 router.post('/notes', (req, res) => {
     if (!req.body.id) {
-        newNote(req.body, notes);
+        res.json(req.body);
     } 
-
-    res.json(req.body);
+    newNote(req.body, notes);
+    
 });
 
 

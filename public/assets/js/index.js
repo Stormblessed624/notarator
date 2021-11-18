@@ -1,8 +1,10 @@
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
 let newNoteBtn;
 let noteList;
+let savedNote;
 
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
@@ -10,6 +12,7 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   noteList = document.querySelectorAll('.list-container .list-group');
+  savedNote = document.querySelector('.list-group')
 }
 
 // Show an element
@@ -52,6 +55,7 @@ const deleteNote = (id) =>
 
 const renderActiveNote = () => {
   hide(saveNoteBtn);
+  console.log(activeNote.id)
 
   if (activeNote.id) {
     noteTitle.setAttribute('readonly', true);
@@ -67,7 +71,10 @@ const renderActiveNote = () => {
 };
 
 const handleNoteSave = () => {
+  let _id = Math.random().toString(36).substring(2);
+  console.log(_id);
   const newNote = {
+    id: _id,
     title: noteTitle.value,
     text: noteText.value,
   };
@@ -84,6 +91,8 @@ const handleNoteDelete = (e) => {
 
   const note = e.target;
   const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  console.log(noteId)
+  console.log(activeNote.id)
 
   if (activeNote.id === noteId) {
     activeNote = {};
@@ -98,7 +107,9 @@ const handleNoteDelete = (e) => {
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
   e.preventDefault();
+  console.log('are you serious')
   activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  console.log(activeNote)
   renderActiveNote();
 };
 
@@ -178,6 +189,7 @@ if (window.location.pathname === '/notes') {
   newNoteBtn.addEventListener('click', handleNewNoteView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
+  
 }
 
 getAndRenderNotes();

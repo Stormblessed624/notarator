@@ -1,8 +1,14 @@
 {
   "notes": [
     {
+      "id": "1",
       "title": "Test Title",
       "text": "Test text"
+    },
+    {
+      "id": "i7dsgx4vt3g",
+      "title": "A test note",
+      "text": "This is the text for the test note"
     }
   ]
 }
